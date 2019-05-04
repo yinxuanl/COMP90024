@@ -1,0 +1,2 @@
+Run Ansible
+ansible-playbook -i ./inventory/hosts.ini -u ubuntu config_harvester.yml
