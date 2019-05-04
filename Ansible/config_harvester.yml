@@ -1,0 +1,34 @@
+# - hosts: harvester1, harvester2, dbserver
+#   sudo: yes
+#   roles:
+#      - common
+
+# - hosts: harvester1
+# # , harvester2, dbserver
+#   sudo: yes
+#   roles:
+#      - docker
+
+# - hosts: harvester1
+#   sudo: yes
+#   vars_files:
+#      - ./var/var.yml
+#   roles:
+#      - harvester1
+
+- hosts: harvester2
+  sudo: yes
+  vars_files:
+     - ./var/var.yml
+  roles:
+     - harvester2
+
+# - hosts: dbserver
+#   sudo: yes
+#   vars_files:
+#      - ./var/var.yml
+#   roles:
+#      - dbserver
+
+
+

@@ -1,0 +1,13 @@
+- name: Install couchdb container
+  sudo: yes
+  docker_container:
+    name: cluster
+    image: "couchdb:2.3.0"
+    ports: 
+      - "5000:5984"
+    env:
+      COUCHDB_USER: "admin"
+      COUCHDB_PASSWORD: "admin"
+      NODENAME: '{{ harvester2 }}'
+    networks:
+      - name: '{{ harvester2 }}'
