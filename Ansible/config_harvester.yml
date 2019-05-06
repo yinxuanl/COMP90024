@@ -1,13 +1,15 @@
-# - hosts: harvester1, harvester2, dbserver
-#   sudo: yes
-#   roles:
-#      - common
+- hosts: harvester2
+# , harvester1, dbserver
+  sudo: yes
+  roles:
+     - common
 
-# - hosts: harvester1
-# # , harvester2, dbserver
-#   sudo: yes
-#   roles:
-#      - docker
+- hosts: harvester2
+# , harvester1
+# , dbserver
+  sudo: yes
+  roles:
+     - docker
 
 # - hosts: harvester1
 #   sudo: yes
