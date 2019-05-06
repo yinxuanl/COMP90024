@@ -1,0 +1,49 @@
+# docker configuration
+
+- name: Add Docker’s official GPG key
+  shell: curl -fsSL https://download.docker.com/linux/ubuntu/gpg \
+    | sudo apt-key add -
+
+- name: Add Docker repository
+  apt_repository:
+    repo: "deb [arch=amd64] https://download.docker.com/linux/ubuntu xenial stable"
+    state: present
+    filename: docker
+
+- name: Install misc packages
+  apt:
+    name: "{{ item }}"
+    update_cache: yes
+  with_items:
+    - "aptitude"
+    - "apt-transport-https"
+    - "ca-certificates"
+    - "curl"
+    - "software-properties-common"
+
+- name: Install 'docker-ce'
+  apt:
+    name: "docker-ce"
+    update_cache: yes
+
+- name: Update pip
+  pip:
+    name: pip
+    extra_args: --upgrade
+    executable: pip3 
+
+
+- name: pip docker 
+  pip:
+    name: 
+      - docker
+    # executable: pip3
+
+
+
+
+
+
+
+
+
