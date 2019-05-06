@@ -10,10 +10,13 @@ ACCESS_TOKEN = '942702516805943296-CY5fdJ5N5UZ3FiLGIlj0b9U0jH39ak2'
 ACCESS_TOKEN_SECRET = '2yK7u81Ia4NbWtR21GtQ1lJyKwxfqTDIO332Q6NGRlOUA'
 
 # settings for CouchDB
-SERVER = 'http://admin:admin@103.6.254.11:5984/'
-# SERVER = 'http://127.0.0.1:5984/'
-DATABASE = 'history'
+# SERVER = 'http://admin:admin@103.6.254.11:5984/'
+SERVER = 'http://127.0.0.1:5984/'
+DATABASE = 'test'
 
+# longitude and latitude
+MELBOURNE = [144.7, -38.1, 145.3, -37.5]
+SYDNEY = [150.8, -34, 151.3, -33.6]
 
 # authentication for Twitter API
 auth = tweepy.OAuthHandler(CONSUMER_KEY, CONSUMER_SECRET)
@@ -41,13 +44,7 @@ def readCommand(argv):
 
     parser.add_option('-f', '--follow', dest='follow', help='follow', default='')
 
-    parser.add_option('-a', '--locationa', dest='locationa', help='location', default='')
-
-    parser.add_option('-b', '--locationb', dest='locationb', help='location', default='')
-
-    parser.add_option('-c', '--locationc', dest='locationc', help='location', default='')
-
-    parser.add_option('-d', '--locationd', dest='locationd', help='location', default='')
+    parser.add_option('-c', '--city', dest='city', help='Melbourne or Sydney', default='Melbourne')
 
     options, otherjunk = parser.parse_args(argv)
     # assert len(otherjunk) == 0, "Unrecognized options: " + str(otherjunk)
@@ -57,25 +54,55 @@ def readCommand(argv):
 
 class MyStreamListener(tweepy.StreamListener):
 
+    # attributes saved: Tweet ID, User ID, created date, (longitude, latitude), text or full_text, hashtags
     def on_status(self, status):
-        # todo: interact with couchdb
-        text = ''
-        json_file = status._json
+        try:
+            tweet = status.extended_tweet
+            text = tweet['full_text']
+            entities = tweet['entities']
 
-        if 'extended_tweet' in json_file.keys():
-            text = json_file['extended_tweet']['full_text']
-        else:
+            location = status.place.name
+            bounding_box = status.place.bounding_box.coordinates
+
+        except AttributeError:
             text = status.text
+            entities = status.entities
+            location = None
+            bounding_box = None
 
-        date = str(status.created_at)
+        hashtags = entities['hashtags']
+        usr_mentions = entities['user_mentions']
+        symbols = entities['symbols']
 
-        user_id = status.user.id
+        try:
+            media = entities['media']
+        except KeyError:
+            media = None
 
-        hashtags = {}
-        if 'hashtags' in json_file['entities'].keys():
-            hashtags = dict(json_file['entities']['hashtags'])
+        user_id = status.author.id
+        user_location = status.author.location
+        user_description = status.author.description
 
-        item = {'_id': str(status.id),'date':date, 'text': text, 'user_id': user_id, 'hashtags': hashtags}
+        coordinates = status.coordinates # could be None
+
+        created_at = str(status.created_at)
+
+        item = {
+            '_id': str(status.id),
+            'created_at': str(created_at),
+            'text': text,
+            'hashtags': hashtags,
+            'user_mentioned': usr_mentions,
+            'symbols': symbols,
+            'media': media,
+            'coordinates': coordinates,
+            'location': location,
+            'bounding_box': bounding_box,
+            'user_id': user_id,
+            'user_location': user_location,
+            'user_description': user_description
+
+        }
 
         try:
             db.save(item)
@@ -84,25 +111,20 @@ class MyStreamListener(tweepy.StreamListener):
             print('Tweet already existed: ', status.id)
 
 
-# todo: determine longitude and latitude for melbourne
-# myStream.filter(locations=[144.7,-37.95,145.3,-37.65])
-
-
 if __name__ == '__main__':
     print('start streaming')
     options = readCommand(sys.argv[1:])
 
     track = options.track
     follow = options.follow
-    a = float(options.locationa)
-    b = float(options.locationb)
-    c = float(options.locationc)
-    d = float(options.locationd)
+    city = options.city
 
     myStreamListener = MyStreamListener()
     myStream = tweepy.Stream(auth=api.auth, listener=myStreamListener)
 
-    if a is not None:
-        myStream.filter(track=[track], follow=[follow], locations=[a,b,c,d], is_async=True)
+    if city == 'Melbourne':
+        myStream.filter(track=[track], follow=[follow], locations=MELBOURNE, is_async=True)
+    elif city == 'Sydney':
+        myStream.filter(track=[track], follow=[follow], locations=SYDNEY, is_async=True)
     else:
-        myStream.filter(track=[options.track], follow=[follow], is_async=True)
+        myStream.filter(track=[track], follow=[follow], is_async=True)
