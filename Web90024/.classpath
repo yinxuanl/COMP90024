@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="lib" path="/Users/melbydh/eclipse-workspace/Web90024/lib/jaxrs-ri/lib/jersey-media-sse.jar">
+		<attributes>
+			<attribute name="module" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="/Users/melbydh/eclipse-workspace/Web90024/lib/jaxrs-ri/lib/jersey-media-json-binding.jar">
+		<attributes>
+			<attribute name="module" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="/Users/melbydh/eclipse-workspace/Web90024/lib/jaxrs-ri/lib/jersey-container-servlet.jar">
+		<attributes>
+			<attribute name="module" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="/Users/melbydh/eclipse-workspace/Web90024/lib/jaxrs-ri/lib/jersey-container-servlet-core.jar">
+		<attributes>
+			<attribute name="module" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="/Users/melbydh/eclipse-workspace/Web90024/lib/jaxrs-ri/lib/jersey-server.jar">
+		<attributes>
+			<attribute name="module" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="/Users/melbydh/eclipse-workspace/Web90024/lib/jaxrs-ri/lib/jersey-media-jaxb.jar">
+		<attributes>
+			<attribute name="module" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="/Users/melbydh/eclipse-workspace/Web90024/lib/jaxrs-ri/lib/jersey-client.jar">
+		<attributes>
+			<attribute name="module" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="/Users/melbydh/eclipse-workspace/Web90024/lib/jaxrs-ri/lib/jersey-hk2.jar">
+		<attributes>
+			<attribute name="module" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="/Users/melbydh/eclipse-workspace/Web90024/lib/jaxrs-ri/lib/jersey-common.jar">
+		<attributes>
+			<attribute name="module" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="/Users/melbydh/eclipse-workspace/Web90024/lib/jaxrs-ri/api/jakarta.ws.rs-api-2.1.5.jar">
+		<attributes>
+			<attribute name="module" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="/Users/melbydh/eclipse-workspace/Web90024/lib/ektorp-all/src/org.ektorp.android-1.2.2-sources.jar">
+		<attributes>
+			<attribute name="module" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="/Users/melbydh/eclipse-workspace/Web90024/lib/ektorp-all/src/org.ektorp.spring-1.2.2-sources.jar">
+		<attributes>
+			<attribute name="module" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="/Users/melbydh/eclipse-workspace/Web90024/lib/ektorp-all/src/org.ektorp-1.2.2-sources.jar">
+		<attributes>
+			<attribute name="module" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="/Users/melbydh/eclipse-workspace/Web90024/lib/ektorp-all/bin/org.ektorp-1.2.2.jar">
+		<attributes>
+			<attribute name="module" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="/Users/melbydh/eclipse-workspace/Web90024/lib/gson-2.8.2.jar">
+		<attributes>
+			<attribute name="module" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="/Users/melbydh/eclipse-workspace/Web90024/lib/fastjson-1.2.57.jar">
+		<attributes>
+			<attribute name="module" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.web.container"/>
+	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.module.container"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-10">
+		<attributes>
+			<attribute name="owner.project.facets" value="java"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="output" path="build/classes"/>
+</classpath>
