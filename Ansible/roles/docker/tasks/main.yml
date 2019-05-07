@@ -33,13 +33,17 @@
     executable: pip3 
 
 
-- name: pip docker 
+- name: Pip docker 
   pip:
     name: 
       - docker
     # executable: pip3
 
+- name: Move storage path 
+  command: mv /var/lib/docker /home/ubuntu/docker
 
+- name: Link storage
+  command: ln -s /home/ubuntu/docker /var/lib/docker
 
 
 

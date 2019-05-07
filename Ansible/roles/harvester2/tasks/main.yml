@@ -1,4 +1,4 @@
-# Configure couchdb
+# Configure couchdb in harvester2
 - name: Install couchdb container
   sudo: yes
   docker_container:
@@ -13,3 +13,5 @@
       COUCHDB_USER: "admin"
       COUCHDB_PASSWORD: "admin"
       NODENAME: '{{ harvester2 }}'
+    # volume:
+
