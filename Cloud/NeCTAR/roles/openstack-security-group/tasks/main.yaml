@@ -25,8 +25,18 @@
     remote_ip_prefix: 0.0.0.0/0
     state: present
 
-# Create security group rules for ssh
+# Create security group rules for http
 - name: Create security group rules for http
+  os_security_group_rule:
+    security_group: Group53-http
+    protocol: tcp
+    port_range_min: 443
+    port_range_max: 443
+    remote_ip_prefix: 0.0.0.0/0
+    state: present
+
+# Create security group rules for ssh
+- name: Create security group rules for ssh
   os_security_group_rule:
     security_group: Group53-ssh
     protocol: tcp
