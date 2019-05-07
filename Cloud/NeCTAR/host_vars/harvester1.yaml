@@ -1,0 +1,22 @@
+# Common vars
+availability_zone: melbourne-qh2-uom
+
+# Volume
+volumes:
+  - vol_name: harvester1
+    vol_size: 60
+
+# Security group
+security_groups:
+  - name: CCC-Group53
+    description: "CCC security group for Group53"
+  - name: Group53-http
+    description: "CCC security group for http access"
+  - name: Group53-ssh
+    description: "CCC security group for ssh access"
+
+# Instance
+instance_name: harvester1
+instance_image: 0a2bac09-8beb-464a-9cbc-6adf4dfcd5e5
+instance_key_name: harvester1
+instance_flavor: uom.mse.2c9g

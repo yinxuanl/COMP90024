@@ -1,0 +1,64 @@
+---
+# Create a security group
+- name: Create a security group
+  os_security_group:
+    name: '{{ item.name }}'
+    description: '{{ item.description }}'
+    state: present
+  loop: '{{ security_groups }}'
+
+- name: Create a list of security group names
+  set_fact:
+    sg_names: '{{ sg_names|default([]) + [ item.name ] }}'
+  loop: '{{ security_groups }}'
+
+- debug:
+    msg: "Security group(s) {{ sg_names }} have been created."
+
+# Create security group rules for http
+- name: Create security group rules for http
+  os_security_group_rule:
+    security_group: Group53-http
+    protocol: tcp
+    port_range_min: 80
+    port_range_max: 80
+    remote_ip_prefix: 0.0.0.0/0
+    state: present
+
+# Create security group rules for ssh
+- name: Create security group rules for http
+  os_security_group_rule:
+    security_group: Group53-ssh
+    protocol: tcp
+    port_range_min: 22
+    port_range_max: 22
+    remote_ip_prefix: 0.0.0.0/0
+    state: present
+
+# Create special security group rules
+- name: Create special security group rules-1
+  os_security_group_rule:
+    security_group: CCC-Group53
+    protocol: tcp
+    remote_group: CCC-Group53
+    state: present
+
+# Create special security group rules
+- name: Create special security group rules-2
+  os_security_group_rule:
+    security_group: CCC-Group53
+    protocol: icmp
+    remote_group: CCC-Group53
+    state: present
+
+# Create special security group rules
+- name: Create special security group rules-3
+  os_security_group_rule:
+    security_group: CCC-Group53
+    protocol: udp
+    remote_group: CCC-Group53
+    state: present
+
+
+
+
