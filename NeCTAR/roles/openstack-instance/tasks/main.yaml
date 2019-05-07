@@ -18,3 +18,6 @@
 - debug:
     msg: "instance {{ instance_name }} has been created. IP address is {{ os_instance.openstack.public_v4 }}"
   when: os_instance.openstack is defined
+
+- name: Print the ip address to inventory
+  shell: echo "[{{ instance_name }}]\n{{ os_instance.openstack.public_v4 }}\n" >> inventory.ini

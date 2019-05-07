@@ -5,8 +5,6 @@ availability_zone: melbourne-qh2-uom
 volumes:
   - vol_name: demo-vol-1
     vol_size: 10
-  - vol_name: demo-vol-2
-    vol_size: 10
 
 # Security group
 security_groups:
@@ -16,15 +14,9 @@ security_groups:
     port_range_min: 22
     port_range_max: 22
     remote_ip_prefix: 0.0.0.0/0
-  - name: demo_http
-    description: "Demo security group for HTTP"
-    protocol: tcp
-    port_range_min: 80
-    port_range_max: 80
-    remote_ip_prefix: 0.0.0.0/0
 
 # Instance
-instance_name: demo
+instance_name: web_server
 instance_image: 0a2bac09-8beb-464a-9cbc-6adf4dfcd5e5
 instance_key_name: CCC-key
 instance_flavor: m1.small
