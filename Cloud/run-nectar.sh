@@ -24,4 +24,4 @@ echo "The harvester1 instance is created"
 
 echo "The harvester2 instance is created"
 
-ansible-playbook -i Config/inventory/hosts.ini -u ubuntu Config/config_harvester.yml
+# ansible-playbook -i Config/inventory/hosts.ini -u ubuntu Config/config_harvester.yml

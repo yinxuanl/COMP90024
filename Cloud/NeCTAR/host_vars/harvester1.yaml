@@ -18,5 +18,6 @@ security_groups:
 # Instance
 instance_name: harvester1
 instance_image: 0a2bac09-8beb-464a-9cbc-6adf4dfcd5e5
+instance_network: qh2-uom-internal
 instance_key_name: harvester1
 instance_flavor: uom.mse.2c9g
