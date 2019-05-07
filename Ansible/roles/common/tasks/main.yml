@@ -1,7 +1,8 @@
 # - name: update packages
-#   apt: update_cache=yes
+  #  apt: update_cache=yes
 
 - name: install packages
+  sudo: yes
   apt: 
     name:
       - python3

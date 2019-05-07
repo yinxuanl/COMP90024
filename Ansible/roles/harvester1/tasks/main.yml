@@ -1,3 +1,4 @@
+# Configure couchdb in harvester1
 - name: Install couchdb container
   sudo: yes
   docker_container:
@@ -5,6 +6,9 @@
     image: "couchdb:2.3.0"
     ports: 
       - "5984:5984"
+      - "4369:4369"
+      - "9100:9100"
+      - "9200:9200"
     env:
       COUCHDB_USER: "admin"
       COUCHDB_PASSWORD: "admin"
