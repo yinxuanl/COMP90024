@@ -1,0 +1,14 @@
+- hosts: localhost
+  gather_facts: true
+  vars_files:
+    - host_vars/var.yaml
+    
+  roles:
+    - role: openstack-common
+    - role: openstack-images
+    - role: openstack-volume
+    - role: openstack-securitygroup
+    - role: instance-dbServer
+    - role: instance-webServer
+    - role: instance-harvester1
+    - role: instance-harvester2

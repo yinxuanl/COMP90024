@@ -1,3 +1,4 @@
+---
 # Common vars
 availability_zone: melbourne-qh2-uom
 
@@ -5,17 +6,21 @@ availability_zone: melbourne-qh2-uom
 volumes:
   - vol_name: dbServer
     vol_size: 80
+  - vol_name: webServer
+    vol_size: 50
+  - vol_name: harvester1
+    vol_size: 60
+  - vol_name: harvester2
+    vol_size: 60
 
 # Security group
 security_groups:
   - name: CCC-Group53
     description: "CCC security group for Group53"
-  - name: Internel
+  - name: Internal
     description: "CCC security group for internal access"
 
 # Instance
-instance_name: dbServer
 instance_image: 84c5db58-d307-451a-aa69-7f5c4b40c385
 instance_network: qh2-uom-internal
-instance_key_name: dbServer
 instance_flavor: uom.mse.2c9g

@@ -85,8 +85,8 @@
     remote_ip_prefix: 0.0.0.0/0
     state: present
 
-# Create security group rules for port 9100-9200
-- name: Create security group rules for port 9100-9200
+# Create security group rules for icmp
+- name: Create security group rules for icmp
   os_security_group_rule:
     security_group: CCC-Group53
     protocol: icmp
