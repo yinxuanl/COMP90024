@@ -47,7 +47,26 @@
   command: ln -s /home/ubuntu/docker /var/lib/docker
 
 
+- name: Create proxy files
+  command: mkdir -p /etc/systemd/system/docker.service.d
 
+- name: Create http-proxy
+  command: sudo touch /etc/systemd/system/docker.service.d/http-proxy.conf
+
+- name: Create https-proxy
+  command: sudo touch /etc/systemd/system/docker.service.d/https-proxy.conf
+
+- name: Set http-proxy
+  copy: src=./roles/docker/configs/http-proxy.conf dest=/etc/systemd/system/docker.service.d/http-proxy.conf
+
+- name: Set https-proxy
+  copy: src=./roles/docker/configs/https-proxy.conf dest=/etc/systemd/system/docker.service.d/https-proxy.conf
+
+- name: Restart daemon-reload
+  command: sudo systemctl daemon-reload
+
+- name: Restart docker
+  command: sudo systemctl restart docker
 
 
 

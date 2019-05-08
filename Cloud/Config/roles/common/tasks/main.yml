@@ -27,5 +27,4 @@
       - python
       - python-pip
     state: present
-
   
