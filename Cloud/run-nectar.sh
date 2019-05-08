@@ -1,8 +1,12 @@
 #!/bin/bash
 
-# remove the exited hosts.ini 
+# remove the existed hosts.ini 
 touch Config/inventory/hosts.ini
 rm Config/inventory/hosts.ini
+
+# remove the existed var.yml
+touch Config/var/var.yml
+rm Config/var/var.yml
 
 # create webserver instance
 . ./openrc.sh; ansible-playbook --ask-become-pass NeCTAR/webServer.yaml
@@ -24,4 +28,8 @@ echo "The harvester1 instance is created"
 
 echo "The harvester2 instance is created"
 
-# ansible-playbook -i Config/inventory/hosts.ini -u ubuntu Config/config_harvester.yml
+echo "COUNT_NODES: 3" >> Config/var/var.yml
+
+# cd Config
+
+# ansible-playbook -i ./inventory/hosts.ini -u ubuntu ./config_harvester.yml

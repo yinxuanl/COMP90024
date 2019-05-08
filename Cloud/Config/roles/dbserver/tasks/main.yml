@@ -12,10 +12,10 @@
     env:
       COUCHDB_USER: "admin"
       COUCHDB_PASSWORD: "admin"
-      NODENAME: '{{ dbserver }}'
+      NODENAME: '{{ dbServer }}'
 
 - name: enable the cluster
-  uri: status_code=201 HEADER_Content-Type="application/json" user=admin password=admin method=POST body_format=json url=http://127.0.0.1:5984/_cluster_setup body='{"action":"enable_cluster","bind_address":"0.0.0.0","username":"admin","password":"admin","node_count":"{{COUNT_NODES}}"}'
+  uri: status_code=201 HEADER_Content-Type="application/json" user=admin password=admin method=POST body_format=json url=http://127.0.0.1:5984/_cluster_setup body='{"action":"enable_cluster","bind_address":"0.0.0.0","username":"admin","password":"admin","node_count":"{{ COUNT_NODES }}"}'
 
 
 - name: add nodes to the cluster
