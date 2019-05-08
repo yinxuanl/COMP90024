@@ -13,7 +13,7 @@ rm Config/var/var.yml
 
 echo "COUNT_NODES: 3" >> Config/var/var.yml
 
-sleep 60
+sleep 180
 
 cd Config
 

@@ -14,16 +14,16 @@
     wait: yes
     timeout: 600
     state: present
-  register: os_instance
+  register: os_instance_harvester2
 
 - debug:
-    msg: "instance harvester2 has been created. IP address is {{ os_instance.openstack.public_v4 }}"
-  when: os_instance.openstack is defined
+    msg: "instance harvester2 has been created. IP address is {{ os_instance_harvester2.openstack.public_v4 }}"
+  when: os_instance_harvester2.openstack is defined
 
 - name: Print the ip address to inventory
-  shell: echo "[harvester2]\n{{ os_instance.openstack.public_v4 }} ansible_ssh_private_key_file=./keys/harvester2.key\n" >> ../Config/inventory/hosts.ini
+  shell: echo "[harvester2]\n{{ os_instance_harvester2.openstack.public_v4 }} ansible_ssh_private_key_file=./keys/harvester2.key\n" >> ../Config/inventory/hosts.ini
 
 - lineinfile:
     path: ../Config/var/var.yml
-    line: 'harvester2: {{ os_instance.openstack.public_v4 }}'
+    line: 'harvester2: {{ os_instance_harvester2.openstack.public_v4 }}'
     create: yes

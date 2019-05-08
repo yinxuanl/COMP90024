@@ -14,16 +14,16 @@
     wait: yes
     timeout: 600
     state: present
-  register: os_instance
+  register: os_instance_webServer
 
 - debug:
-    msg: "instance webServer has been created. IP address is {{ os_instance.openstack.public_v4 }}"
-  when: os_instance.openstack is defined
+    msg: "instance webServer has been created. IP address is {{ os_instance_webServer.openstack.public_v4 }}"
+  when: os_instance_webServer.openstack is defined
 
 - name: Print the ip address to inventory
-  shell: echo "[webServer]\n{{ os_instance.openstack.public_v4 }} ansible_ssh_private_key_file=./keys/webServer.key\n" >> ../Config/inventory/hosts.ini
+  shell: echo "[webServer]\n{{ os_instance_webServer.openstack.public_v4 }} ansible_ssh_private_key_file=./keys/webServer.key\n" >> ../Config/inventory/hosts.ini
 
 - lineinfile:
     path: ../Config/var/var.yml
-    line: 'webServer: {{ os_instance.openstack.public_v4 }}'
+    line: 'webServer: {{ os_instance_webServer.openstack.public_v4 }}'
     create: yes
