@@ -30,6 +30,8 @@ echo "The harvester2 instance is created"
 
 echo "COUNT_NODES: 3" >> Config/var/var.yml
 
-# cd Config
+sleep 60
 
-# ansible-playbook -i ./inventory/hosts.ini -u ubuntu ./config_harvester.yml
+cd Config
+
+ansible-playbook -i ./inventory/hosts.ini -u ubuntu ./config_harvester.yml

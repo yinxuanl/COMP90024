@@ -10,10 +10,8 @@ volumes:
 security_groups:
   - name: CCC-Group53
     description: "CCC security group for Group53"
-  - name: Group53-http
-    description: "CCC security group for http access"
-  - name: Group53-ssh
-    description: "CCC security group for ssh access"
+  - name: Internel
+    description: "CCC security group for internal access"
 
 # Instance
 instance_name: harvester1

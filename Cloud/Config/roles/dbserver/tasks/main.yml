@@ -14,16 +14,28 @@
       COUCHDB_PASSWORD: "admin"
       NODENAME: '{{ dbServer }}'
 
-- name: enable the cluster
-  command: curl -X POST -H "Content-Type:application/json" http://admin:admin@127.0.0.1:5984/_cluster_setup -d '{"action":"enable_cluster", "bind_address":"0.0.0.0", "username":"admin", "password":"admin", "node_count":"{{ COUNT_NODES }}"}'
+# - name: enable the cluster
+#   shell: |
+#     curl -X POST -H "Content-Type:\ application/json" http://admin:admin@127.0.0.1:5984/_cluster_setup -d '{"action":\ "enable_cluster", "bind_address":"0.0.0.0", "username":\ "admin", "password":\ "admin", "node_count":\ "{{ COUNT_NODES }}"}'
 
 
-- name: add nodes to the cluster
-  command: curl -X POST -H "Content-Type:application/json" http://admin:admin@127.0.0.1:5984/_cluster_setup -d '{"action":"add_node", "host":"{{ item }}", "port":"5984", "username":"admin", "password":"admin"}'
-  with_items: 
-    - '{{ harvester1 }}'
-    - '{{ harvester2 }}'
+# - name: add nodes to the cluster
+#   shell: |
+#     curl -X POST -H "Content-Type:\ application/json" http://admin:admin@127.0.0.1:5984/_cluster_setup -d '{"action":\ "add_node", "host":\ "{{ item }}", "port":\ "5984", "username":\ "admin", "password":\ "admin"}'
+#   with_items: 
+#     - '{{ harvester1 }}'
+#     - '{{ harvester2 }}'
 
 
-- name: finish the cluster
-  command: curl -X POST -H "Content-Type:application/json" http://admin:admin@127.0.0.1:5984/_cluster_setup -d '{"action":"finish_cluster"}'
+# - name: finish the cluster
+#   shell: |
+#     curl -X POST -H "Content-Type:\ application/json" http://admin:admin@127.0.0.1:5984/_cluster_setup -d '{"action":\ "finish_cluster"}'
+
+# - name: Copy sh script to server
+#   copy: src=cluster.sh dest=/etc/cluster.sh
+
+# - name: chmod
+#   shell: chmod 755 /etc/cluster.sh
+
+# - name: Run the script
+#   shell: /etc/cluster.sh '{{ harvester1 }}' '{{ harvester2 }}'

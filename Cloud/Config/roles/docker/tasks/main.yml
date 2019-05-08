@@ -56,11 +56,24 @@
 - name: Create https-proxy
   command: sudo touch /etc/systemd/system/docker.service.d/https-proxy.conf
 
+- name: Create ftp-proxy
+  command: sudo touch /etc/systemd/system/docker.service.d/ftp-proxy.conf
+
+- name: Create no-proxy
+  command: sudo touch /etc/systemd/system/docker.service.d/no-proxy.conf
+
 - name: Set http-proxy
   copy: src=./roles/docker/configs/http-proxy.conf dest=/etc/systemd/system/docker.service.d/http-proxy.conf
 
 - name: Set https-proxy
   copy: src=./roles/docker/configs/https-proxy.conf dest=/etc/systemd/system/docker.service.d/https-proxy.conf
+
+- name: Set ftp-proxy
+  copy: src=./roles/docker/configs/ftp-proxy.conf dest=/etc/systemd/system/docker.service.d/ftp-proxy.conf
+
+- name: Set no-proxy
+  copy: src=./roles/docker/configs/no-proxy.conf dest=/etc/systemd/system/docker.service.d/no-proxy.conf
+
 
 - name: Restart daemon-reload
   command: sudo systemctl daemon-reload

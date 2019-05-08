@@ -15,58 +15,106 @@
 - debug:
     msg: "Security group(s) {{ sg_names }} have been created."
 
-# Create security group rules for http
-- name: Create security group rules for http
+# Create security group rules for port 80
+- name: Create security group rules for port 80
   os_security_group_rule:
-    security_group: Group53-http
+    security_group: CCC-Group53
     protocol: tcp
     port_range_min: 80
     port_range_max: 80
     remote_ip_prefix: 0.0.0.0/0
     state: present
 
-# Create security group rules for http
-- name: Create security group rules for http
+# Create security group rules for port 443
+- name: Create security group rules for port 443
   os_security_group_rule:
-    security_group: Group53-http
+    security_group: CCC-Group53
     protocol: tcp
     port_range_min: 443
     port_range_max: 443
     remote_ip_prefix: 0.0.0.0/0
     state: present
 
-# Create security group rules for ssh
-- name: Create security group rules for ssh
+# Create security group rules for port 22
+- name: Create security group rules for port 22
   os_security_group_rule:
-    security_group: Group53-ssh
+    security_group: CCC-Group53
     protocol: tcp
     port_range_min: 22
     port_range_max: 22
     remote_ip_prefix: 0.0.0.0/0
     state: present
 
-# Create special security group rules
-- name: Create special security group rules-1
+# Create security group rules for port 5986
+- name: Create security group rules for port 5986
   os_security_group_rule:
     security_group: CCC-Group53
     protocol: tcp
-    remote_group: CCC-Group53
+    port_range_min: 5986
+    port_range_max: 5986
+    remote_ip_prefix: 0.0.0.0/0
     state: present
 
-# Create special security group rules
-- name: Create special security group rules-2
+# Create security group rules for port 4369
+- name: Create security group rules for port 4369
+  os_security_group_rule:
+    security_group: CCC-Group53
+    protocol: tcp
+    port_range_min: 4369
+    port_range_max: 4369
+    remote_ip_prefix: 0.0.0.0/0
+    state: present
+
+# Create security group rules for port 5984
+- name: Create security group rules for port 5984
+  os_security_group_rule:
+    security_group: CCC-Group53
+    protocol: tcp
+    port_range_min: 5984
+    port_range_max: 5984
+    remote_ip_prefix: 0.0.0.0/0
+    state: present
+
+# Create security group rules for port 9100-9200
+- name: Create security group rules for port 9100-9200
+  os_security_group_rule:
+    security_group: CCC-Group53
+    protocol: tcp
+    port_range_min: 9100
+    port_range_max: 9200
+    remote_ip_prefix: 0.0.0.0/0
+    state: present
+
+# Create security group rules for port 9100-9200
+- name: Create security group rules for port 9100-9200
   os_security_group_rule:
     security_group: CCC-Group53
     protocol: icmp
-    remote_group: CCC-Group53
+    remote_ip_prefix: 0.0.0.0/0
     state: present
 
-# Create special security group rules
-- name: Create special security group rules-3
+# Create special security group rules for internal - tcp
+- name: Create special security group rules for internal - tcp
   os_security_group_rule:
-    security_group: CCC-Group53
+    security_group: Internal
+    protocol: tcp
+    remote_group: Internal
+    state: present
+
+# Create special security group rules for internal - icmp
+- name: Create special security group rules for internal - icmp
+  os_security_group_rule:
+    security_group: Internal
+    protocol: icmp
+    remote_group: Internal
+    state: present
+
+# Create special security group rules for internal udp
+- name: Create special security group rules for internal udp
+  os_security_group_rule:
+    security_group: Internal
     protocol: udp
-    remote_group: CCC-Group53
+    remote_group: Internal
     state: present
 
 
