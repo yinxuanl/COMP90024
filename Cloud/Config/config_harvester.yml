@@ -1,12 +1,12 @@
-- hosts: harvester2, harvester1, dbServer
-  sudo: yes
-  roles:
-     - common
+# - hosts: harvester2, harvester1, dbServer
+#   sudo: yes
+#   roles:
+#      - common
 
-- hosts: harvester2, harvester1, dbServer
-  sudo: yes
-  roles:
-     - docker
+# - hosts: harvester2, harvester1, dbServer
+#   sudo: yes
+#   roles:
+#      - docker
 
 - hosts: harvester1
   sudo: yes
@@ -22,12 +22,12 @@
   roles:
      - harvester2
 
-- hosts: dbServer
-  sudo: yes
-  vars_files:
-     - ./var/var.yml
-  roles:
-     - dbserver
+# - hosts: dbServer
+#   sudo: yes
+#   vars_files:
+#      - ./var/var.yml
+#   roles:
+#      - dbserver
 
 
 
