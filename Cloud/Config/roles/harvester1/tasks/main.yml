@@ -14,10 +14,3 @@
       COUCHDB_PASSWORD: "admin"
       NODENAME: '{{ harvester1 }}'
 
-- name: install harvester packages
-  sudo: yes
-  pip:
-    name:
-      - tweepy
-      - couchdb
-    executable: pip3
