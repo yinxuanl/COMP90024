@@ -1,18 +1,18 @@
-# Configure couchdb in main database
-- name: Install couchdb container
-  sudo: yes
-  docker_container:
-    name: couchdb
-    image: "couchdb:2.3.0"
-    ports: 
-      - "5984:5984"
-      - "4369:4369"
-      - "9100:9100"
-      - "9200:9200"
-    env:
-      COUCHDB_USER: "admin"
-      COUCHDB_PASSWORD: "admin"
-      NODENAME: '{{ dbServer }}'
+# # Configure couchdb in main database
+# - name: Install couchdb container
+#   sudo: yes
+#   docker_container:
+#     name: couchdb
+#     image: "couchdb:2.3.0"
+#     ports: 
+#       - "5984:5984"
+#       - "4369:4369"
+#       - "9100:9100"
+#       - "9200:9200"
+#     env:
+#       COUCHDB_USER: "admin"
+#       COUCHDB_PASSWORD: "admin"
+#       NODENAME: '{{ dbServer }}'
 
 # - name: enable the cluster
 #   shell: |
@@ -31,11 +31,12 @@
 #   shell: |
 #     curl -X POST -H "Content-Type:\ application/json" http://admin:admin@127.0.0.1:5984/_cluster_setup -d '{"action":\ "finish_cluster"}'
 
-# - name: Copy sh script to server
-#   copy: src=cluster.sh dest=/etc/cluster.sh
+- name: Copy sh script to server
+  copy: src=cluster.sh dest=/etc/cluster.sh
 
-# - name: chmod
-#   shell: chmod 755 /etc/cluster.sh
+- name: chmod
+  shell: chmod 755 /etc/cluster.sh
 
-# - name: Run the script
-#   shell: /etc/cluster.sh '{{ harvester1 }}' '{{ harvester2 }}'
+- name: Run the script
+  shell: /etc/cluster.sh
+  # '{{ harvester1 }}' '{{ harvester2 }}'
