@@ -1,24 +1,36 @@
 # Configure couchdb in harvester2
-- name: Install couchdb container
-  sudo: yes
-  docker_container:
-    name: couchdb
-    image: "couchdb:2.3.0"
-    ports: 
-      - "5984:5984"
-      - "4369:4369"
-      - "9100:9100"
-      - "9200:9200"
-    env:
-      COUCHDB_USER: "admin"
-      COUCHDB_PASSWORD: "admin"
-      NODENAME: '{{ harvester2 }}'
-    # volume:
+# - name: Install couchdb container
+#   sudo: yes
+#   docker_container:
+#     name: couchdb
+#     image: "couchdb:2.3.0"
+#     ports: 
+#       - "5984:5984"
+#       - "4369:4369"
+#       - "9100:9100"
+#       - "9200:9200"
+#     env:
+#       COUCHDB_USER: "admin"
+#       COUCHDB_PASSWORD: "admin"
+#       NODENAME: '{{ harvester2 }}'
+#     # volume:
 
-- name: install harvester packages
-  sudo: yes
-  pip:
-    name:
-      - tweepy
-      - couchdb
-    executable: pip3
+# - name: install harvester packages
+#   sudo: yes
+#   pip:
+#     name:
+#       - tweepy
+#       - couchdb
+#     executable: pip3
+
+- name: Copy sh script to instance
+  copy: src=got.sh dest=got.sh
+
+- name: Copy TwitterSearch.py to instance
+  copy: src=TwitterSearch.py dest=TwitterSearch.py
+
+- name: chmod
+  shell: chmod 755 got.sh
+
+- name: Run the script
+  shell: /home/ubuntu/got.sh
