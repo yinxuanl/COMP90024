@@ -40,12 +40,12 @@
 - name: Run the script
   shell: /etc/cluster.sh 
 
-- name: Copy sh script to server
-  copy: src=cluster.sh dest=/etc/cluster.sh
+# - name: Copy sh script to server
+#   copy: src=cluster.sh dest=/etc/cluster.sh
 
-- name: chmod
-  shell: chmod 755 /etc/cluster.sh
+# - name: chmod
+#   shell: chmod 755 /etc/cluster.sh
 
-- name: Run the script
-  shell: /etc/cluster.sh
+# - name: Run the script
+#   shell: /etc/cluster.sh
 
