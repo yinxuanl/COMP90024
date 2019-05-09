@@ -14,28 +14,30 @@
       COUCHDB_PASSWORD: "admin"
       NODENAME: '{{ dbServer }}'
 
-# - name: enable the cluster
-#   shell: |
-#     curl -X POST -H "Content-Type:\ application/json" http://admin:admin@127.0.0.1:5984/_cluster_setup -d '{"action":\ "enable_cluster", "bind_address":"0.0.0.0", "username":\ "admin", "password":\ "admin", "node_count":\ "{{ COUNT_NODES }}"}'
 
+- name: Copy sh script to server
+  copy: 
+    src: cluster.sh 
+    dest: /etc/cluster.sh
+    mode: 0755
 
-# - name: add nodes to the cluster
-#   shell: |
-#     curl -X POST -H "Content-Type:\ application/json" http://admin:admin@127.0.0.1:5984/_cluster_setup -d '{"action":\ "add_node", "host":\ "{{ item }}", "port":\ "5984", "username":\ "admin", "password":\ "admin"}'
-#   with_items: 
-#     - '{{ harvester1 }}'
-#     - '{{ harvester2 }}'
+- name: Copy curl command into shell script - harvester1
+  copy: 
+    content: 'curl -X POST -H "Content-Type: application/json" http://admin:admin@127.0.0.1:5984/_cluster_setup -d ''{"action": "add_node", "host": {{ harvester1 }}, "port": "5984", "username": "admin", "password":"admin"}'''
+    dest: /etc/cluster.sh
 
+- name: Copy curl command into shell script - harvester2
+  copy: 
+    content: 'curl -X POST -H "Content-Type: application/json" http://admin:admin@127.0.0.1:5984/_cluster_setup -d ''{"action": "add_node", "host": {{ harvester2 }}, "port": "5984", "username": "admin", "password":"admin"}'''
+    dest: /etc/cluster.sh
 
-# - name: finish the cluster
-#   shell: |
-#     curl -X POST -H "Content-Type:\ application/json" http://admin:admin@127.0.0.1:5984/_cluster_setup -d '{"action":\ "finish_cluster"}'
-
-# - name: Copy sh script to server
-#   copy: src=cluster.sh dest=/etc/cluster.sh
+- name: Copy curl command into shell script - finish
+  copy:
+    content: '# curl -X POST -H "Content-Type: application/json" http://admin:admin@127.0.0.1:5984/_cluster_setup -d ''{"action": "finish_cluster"}'''
+    dest: /etc/cluster.sh
 
 # - name: chmod
 #   shell: chmod 755 /etc/cluster.sh
 
-# - name: Run the script
-#   shell: /etc/cluster.sh '{{ harvester1 }}' '{{ harvester2 }}'
+- name: Run the script
+  shell: /etc/cluster.sh '{{ harvester1 }}' '{{ harvester2 }}'
