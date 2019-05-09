@@ -14,30 +14,46 @@
       COUCHDB_PASSWORD: "admin"
       NODENAME: '{{ dbServer }}'
 
-
 - name: Copy sh script to server
   copy: 
     src: cluster.sh 
     dest: /etc/cluster.sh
-    mode: 0755
+
+- name: chmod
+  shell: chmod 755 /etc/cluster.sh
 
 - name: Copy curl command into shell script - harvester1
-  copy: 
-    content: 'curl -X POST -H "Content-Type: application/json" http://admin:admin@127.0.0.1:5984/_cluster_setup -d ''{"action": "add_node", "host": {{ harvester1 }}, "port": "5984", "username": "admin", "password":"admin"}'''
-    dest: /etc/cluster.sh
+  lineinfile: 
+    path: /etc/cluster.sh
+    line: 'curl -X POST -H "Content-Type: application/json" http://admin:admin@127.0.0.1:5984/_cluster_setup -d ''{"action": "add_node", "host": "{{ harvester1 }}", "port": "5984", "username": "admin", "password":"admin"}'''
 
 - name: Copy curl command into shell script - harvester2
-  copy: 
-    content: 'curl -X POST -H "Content-Type: application/json" http://admin:admin@127.0.0.1:5984/_cluster_setup -d ''{"action": "add_node", "host": {{ harvester2 }}, "port": "5984", "username": "admin", "password":"admin"}'''
-    dest: /etc/cluster.sh
+  lineinfile: 
+    path: /etc/cluster.sh
+    line: 'curl -X POST -H "Content-Type: application/json" http://admin:admin@127.0.0.1:5984/_cluster_setup -d ''{"action": "add_node", "host": "{{ harvester2 }}", "port": "5984", "username": "admin", "password":"admin"}'''
 
 - name: Copy curl command into shell script - finish
-  copy:
-    content: '# curl -X POST -H "Content-Type: application/json" http://admin:admin@127.0.0.1:5984/_cluster_setup -d ''{"action": "finish_cluster"}'''
-    dest: /etc/cluster.sh
-
-# - name: chmod
-#   shell: chmod 755 /etc/cluster.sh
+  lineinfile:
+    path: /etc/cluster.sh
+    line: 'curl -X POST -H "Content-Type: application/json" http://admin:admin@127.0.0.1:5984/_cluster_setup -d ''{"action": "finish_cluster"}'''
 
 - name: Run the script
-  shell: /etc/cluster.sh '{{ harvester1 }}' '{{ harvester2 }}'
+  shell: /etc/cluster.sh 
+
+# - name: normal setup
+#   shell: curl -X POST -H "Content-Type:\ application/json" http://admin:admin@127.0.0.1:5984/_cluster_setup -d '{"action":"enable_cluster", "bind_address":"0.0.0.0", "username":"admin", "password":"admin"}'
+
+# - name: harvester1 setup
+#   shell: curl -X POST -H "Content-Type:\ application/json" http://admin:admin@127.0.0.1:5984/_cluster_setup -d '{"action":"add_node", "host":{{ harvester1 }}, "port":"5984", "username":"admin", "password":"admin"}'
+
+# - name: harvester2
+#   shell: curl -X POST -H "Content-Type:\ application/json" http://admin:admin@127.0.0.1:5984/_cluster_setup -d '{"action":"add_node", "host":{{ harvester2 }}, "port":"5984", "username":"admin", "password":"admin"}'
+
+# - name: finish
+#   shell: curl -X POST -H "Content-Type:\ application/json" http://admin:admin@127.0.0.1:5984/_cluster_setup -d '{"action":"finish_cluster"}'
+
+
+
+
+
+
