@@ -15,3 +15,10 @@
       NODENAME: '{{ harvester2 }}'
     # volume:
 
+- name: install harvester packages
+  sudo: yes
+  pip:
+    name:
+      - tweepy
+      - couchdb
+    executable: pip3
