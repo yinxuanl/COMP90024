@@ -15,13 +15,9 @@ auth.set_access_token(ACCESS_TOKEN, ACCESS_TOKEN_SECRET)
 api = tweepy.API(auth)
 
 # settings for CouchDB
-SERVER = 'http://admin:admin@172.26.38.63:5984/'
-# SERVER = 'http://127.0.0.1:5984/'
+# SERVER = 'http://admin:admin@172.26.38.63:5984/'
+SERVER = 'http://admin:admin@localhost:5984/'
 server = couchdb.Server(SERVER)
-try:
-    user_db = server['twitter_user']
-except couchdb.http.ResourceNotFound:
-    user_db = server.create('twitter_user')
 
 
 def readCommand(argv):
@@ -37,6 +33,8 @@ def readCommand(argv):
     parser.add_option('-d', '--database', dest='database', help='database name', default='')
 
     parser.add_option('-t', '--timeline', dest='timeline', help='home timeline', default='')
+
+    parser.add_option('-u', '--userdb', dest='userdb', help='user database', default='')
 
     options, otherjunk = parser.parse_args(argv)
     # assert len(otherjunk) == 0, "Unrecognized options: " + str(otherjunk)
@@ -153,6 +151,7 @@ if __name__ == '__main__':
     query = options.query
     database_name = options.database
     timeline_database = options.timeline
+    user_database = options.userdb
 
     # connect to or create a database
     try:
@@ -160,9 +159,16 @@ if __name__ == '__main__':
     except couchdb.http.ResourceNotFound:
         db = server.create(database_name)
 
+    # user home timeline database
     try:
         udb = server[timeline_database]
     except couchdb.http.ResourceNotFound:
         udb = server.create(timeline_database)
+
+    # user database
+    try:
+        user_db = server[user_database]
+    except couchdb.http.ResourceNotFound:
+        user_db = server.create(user_database)
 
     search(query)
