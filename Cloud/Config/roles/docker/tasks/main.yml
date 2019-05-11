@@ -41,14 +41,14 @@
     # executable: pip3
 
 - name: Move storage path 
-  command: mv /var/lib/docker /dev/vdb/docker
+  shell: mv -f /var/lib/docker /data
 
 - name: Link storage
-  command: ln -s /dev/vdb/docker /var/lib/docker
+  shell: ln -s /data/docker /var/lib/docker
 
 
 - name: Create proxy files
-  command: mkdir -p /etc/systemd/system/docker.service.d
+  shell: mkdir -p /etc/systemd/system/docker.service.d
 
 - name: Create http-proxy
   command: sudo touch /etc/systemd/system/docker.service.d/http-proxy.conf

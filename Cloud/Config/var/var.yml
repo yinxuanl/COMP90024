@@ -1,5 +1,5 @@
-dbServer: 172.26.37.203
-webServer: 172.26.38.130
-harvester1: 172.26.37.239
-harvester2: 172.26.38.180
+dbServer: 172.26.37.214
+webServer: 172.26.38.187
+harvester1: 172.26.38.160
+harvester2: 172.26.38.84
 COUNT_NODES: 3

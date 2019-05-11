@@ -23,17 +23,17 @@
       - couchdb
     executable: pip3
 
-- name: Copy sh script to instance
-  copy: src=marvel.sh dest=marvel.sh
+# - name: Copy sh script to instance
+#   copy: src=marvel.sh dest=marvel.sh
 
-- name: Copy TwitterSearch.py to instance
-  copy: src=TwitterSearch.py dest=TwitterSearch.py
+# - name: Copy TwitterSearch.py to instance
+#   copy: src=TwitterSearch.py dest=TwitterSearch.py
 
-- name: Copy methods.py to instance
-  copy: src=methods.py dest=methods.py
+# - name: Copy methods.py to instance
+#   copy: src=methods.py dest=methods.py
 
-- name: chmod
-  shell: chmod 755 marvel.sh
+# - name: chmod
+#   shell: chmod 755 marvel.sh
 
-- name: Run the script
-  shell: /home/ubuntu/marvel.sh
+# - name: Run the script
+#   shell: /home/ubuntu/marvel.sh
