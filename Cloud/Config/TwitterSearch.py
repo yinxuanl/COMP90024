@@ -1,5 +1,7 @@
 import sys
 import re
+import time
+
 import couchdb
 import tweepy
 
@@ -15,8 +17,8 @@ auth.set_access_token(ACCESS_TOKEN, ACCESS_TOKEN_SECRET)
 api = tweepy.API(auth)
 
 # settings for CouchDB
-# SERVER = 'http://admin:admin@172.26.38.63:5984/'
-SERVER = 'http://admin:admin@localhost:5984/'
+SERVER = 'http://admin:admin@172.26.38.63:5984/'
+# SERVER = 'http://127.0.0.1:5984/'
 server = couchdb.Server(SERVER)
 
 
@@ -50,7 +52,7 @@ def search(query):
         tweet_mode='extended',
         since='2019-05-01',
         until='2019-05-08',
-        geocode='-33.865143,151.209900,15mi'
+        geocode='-33.865143,151.209900,30mi'
     ).items()
     searched_tweets = [status for status in collection]
 
@@ -82,7 +84,7 @@ def search(query):
 
         # is this tweet is retweeted from other user, save the retweeted user for later crawling
         pattern = 'RT\s@[a-zA-Z]+'
-        is_match = re.search(pattern,item['text'])
+        is_match = re.search(pattern, item['text'])
         if is_retweeted and is_match:
             username = is_match.group()[4:]
             user = {
@@ -102,47 +104,58 @@ def search(query):
             'user id': item['user_id'],
             'user description': tweet_object['user']['description']
         }
+
+        users.append(user['_id'])
+
         try:
             user_db.save(user)
-            users.append(user['_id'])
             # print('Inserted one user...')
         except couchdb.http.ResourceConflict:
             print('User already existed.')
+        except couchdb.http.ServerError:
+            continue
 
     for user in users:
-        timelines = [status for status in tweepy.Cursor(api.user_timeline, screen_name=user, tweet_mode='extended').items()]
+        try:
+            timelines = [status for status in
+                         tweepy.Cursor(api.user_timeline, screen_name=user, tweet_mode='extended').items()]
 
-        for status in timelines:
-            tweet_object = status._json
-            timeline_item = {
-                '_id': tweet_object['id_str'],
-                'text': tweet_object['full_text'],
-                'user_id': tweet_object['user']['id_str']
-            }
-
-            try:
-                udb.save(timeline_item)
-                # print('Inserted one timeline status...')
-            except couchdb.http.ResourceConflict:
-                print('User status already existed.')
-
-            # if the status contains key word, save it to related db
-            if re.search(query, timeline_item['text']):
-                item = {
+            for status in timelines:
+                tweet_object = status._json
+                timeline_item = {
                     '_id': tweet_object['id_str'],
                     'text': tweet_object['full_text'],
-                    'hashtags': tweet_object['entities']['hashtags'],
-                    'symbols': tweet_object['entities']['symbols'],
-                    'user_id': tweet_object['user']['id_str'],
-                    'geo': tweet_object['geo'],
-                    'coordinates': tweet_object['coordinates'],
-                    'place': tweet_object['place'],
-                    'is_retweet': tweet_object['retweeted']
+                    'user_id': tweet_object['user']['id_str']
                 }
+
                 try:
-                    db.save(item)
+                    udb.save(timeline_item)
+                    # print('Inserted one timeline status...')
                 except couchdb.http.ResourceConflict:
-                    print('Tweet already existed.')
+                    print('User status already existed.')
+
+                # if the status contains key word, save it to related db
+                if re.search(query, timeline_item['text']):
+                    item = {
+                        '_id': tweet_object['id_str'],
+                        'text': tweet_object['full_text'],
+                        'hashtags': tweet_object['entities']['hashtags'],
+                        'symbols': tweet_object['entities']['symbols'],
+                        'user_id': tweet_object['user']['id_str'],
+                        'geo': tweet_object['geo'],
+                        'coordinates': tweet_object['coordinates'],
+                        'place': tweet_object['place'],
+                        'is_retweet': tweet_object['retweeted']
+                    }
+                    try:
+                        db.save(item)
+                    except couchdb.http.ResourceConflict:
+                        print('Tweet already existed.')
+
+        except tweepy.error.RateLimitError:
+            time.sleep(180)
+        except tweepy.error.TweepError:
+            time.sleep(180)
 
 
 if __name__ == '__main__':
