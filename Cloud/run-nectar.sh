@@ -17,4 +17,4 @@ sleep 180
 
 cd Config
 
-ansible-playbook -i ./inventory/hosts.ini -u ubuntu ./config_harvester.yml
+ansible-playbook -i ./inventory/hosts.ini -u ubuntu ./config.yml

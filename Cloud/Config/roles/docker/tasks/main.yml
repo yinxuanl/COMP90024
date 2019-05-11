@@ -41,10 +41,10 @@
     # executable: pip3
 
 - name: Move storage path 
-  command: mv /var/lib/docker /home/ubuntu/docker
+  command: mv /var/lib/docker /dev/vdb/docker
 
 - name: Link storage
-  command: ln -s /home/ubuntu/docker /var/lib/docker
+  command: ln -s /dev/vdb/docker /var/lib/docker
 
 
 - name: Create proxy files
