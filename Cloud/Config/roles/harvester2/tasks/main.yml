@@ -23,14 +23,17 @@ Configure couchdb in harvester2
       - couchdb
     executable: pip3
 
-# - name: Copy sh script to instance
-#   copy: src=got.sh dest=got.sh
+- name: Copy sh script to instance
+  copy: src=got.sh dest=got.sh
 
-# - name: Copy TwitterSearch.py to instance
-#   copy: src=TwitterSearch.py dest=TwitterSearch.py
+- name: Copy TwitterSearch.py to instance
+  copy: src=TwitterSearch.py dest=TwitterSearch.py
 
-# - name: chmod
-#   shell: chmod 755 got.sh
+- name: Copy methods.py to instance
+  copy: src=methods.py dest=methods.py
 
-# - name: Run the script
-#   shell: /home/ubuntu/got.sh
+- name: chmod
+  shell: chmod 755 got.sh
+
+- name: Run the script
+  shell: /home/ubuntu/got.sh
