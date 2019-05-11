@@ -1,35 +1,35 @@
-# Configure couchdb in harvester1
-# - name: Install couchdb container
-#   sudo: yes
-#   docker_container:
-#     name: couchdb
-#     image: "couchdb:2.3.0"
-#     ports: 
-#       - "5984:5984"
-#       - "4369:4369"
-#       - "9100:9100"
-#       - "9200:9200"
-#     env:
-#       COUCHDB_USER: "admin"
-#       COUCHDB_PASSWORD: "admin"
-#       NODENAME: '{{ harvester1 }}'
+Configure couchdb in harvester1
+- name: Install couchdb container
+  sudo: yes
+  docker_container:
+    name: couchdb
+    image: "couchdb:2.3.0"
+    ports: 
+      - "5984:5984"
+      - "4369:4369"
+      - "9100:9100"
+      - "9200:9200"
+    env:
+      COUCHDB_USER: "admin"
+      COUCHDB_PASSWORD: "admin"
+      NODENAME: '{{ harvester1 }}'
 
-# - name: install harvester packages
-#   sudo: yes
-#   pip:
-#     name:
-#       - tweepy
-#       - couchdb
-#     executable: pip3
+- name: install harvester packages
+  sudo: yes
+  pip:
+    name:
+      - tweepy
+      - couchdb
+    executable: pip3
 
-- name: Copy sh script to instance
-  copy: src=marvel.sh dest=marvel.sh
+# - name: Copy sh script to instance
+#   copy: src=marvel.sh dest=marvel.sh
 
-- name: Copy TwitterSearch.py to instance
-  copy: src=TwitterSearch.py dest=TwitterSearch.py
+# - name: Copy TwitterSearch.py to instance
+#   copy: src=TwitterSearch.py dest=TwitterSearch.py
 
-- name: chmod
-  shell: chmod 755 marvel.sh
+# - name: chmod
+#   shell: chmod 755 marvel.sh
 
-- name: Run the script
-  shell: /home/ubuntu/marvel.sh
+# - name: Run the script
+#   shell: /home/ubuntu/marvel.sh
