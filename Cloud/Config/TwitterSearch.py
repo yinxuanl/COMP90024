@@ -18,7 +18,7 @@ api = tweepy.API(auth)
 
 # settings for CouchDB
 # SERVER = 'http://admin:admin@172.26.38.63:5984/'
-SERVER = 'http://127.0.0.1:5984/'
+SERVER = 'http://admin:admin@127.0.0.1:5984/'
 server = couchdb.Server(SERVER)
 
 # geo information

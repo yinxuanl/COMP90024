@@ -21,6 +21,7 @@
     name:
       - tweepy
       - couchdb
+      - textblob
     executable: pip3
 
 # - name: Copy sh script to instance
@@ -35,5 +36,3 @@
 # - name: chmod
 #   shell: chmod 755 marvel.sh
 
-# - name: Run the script
-#   shell: /home/ubuntu/marvel.sh

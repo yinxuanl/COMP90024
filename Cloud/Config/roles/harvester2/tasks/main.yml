@@ -14,7 +14,7 @@
       COUCHDB_USER: "admin"
       COUCHDB_PASSWORD: "admin"
       NODENAME: '{{ harvester2 }}'
-    # volume:
+
 
 - name: install harvester packages
   sudo: yes
@@ -22,6 +22,7 @@
     name:
       - tweepy
       - couchdb
+      - textblob
     executable: pip3
 
 # - name: Copy sh script to instance
@@ -35,6 +36,3 @@
 
 # - name: chmod
 #   shell: chmod 755 got.sh
-
-# - name: Run the script
-#   shell: /home/ubuntu/got.sh
