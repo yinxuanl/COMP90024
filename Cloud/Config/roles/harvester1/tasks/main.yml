@@ -1,4 +1,5 @@
-Configure couchdb in harvester1
+---
+# Configure couchdb in harvester1
 - name: Install couchdb container
   sudo: yes
   docker_container:
