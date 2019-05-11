@@ -2,6 +2,20 @@
 # - name: update packages
   #  apt: update_cache=yes
 
+- name: Format the volume
+  shell: sudo mkfs.ext4 /dev/vdb
+
+- name: Mkdir /data
+  shell: sudo mkdir -p /data
+
+- name: Mount vdb
+  shell: sudo mount -t auto /dev/vdb /data
+
+- lineinfile:
+    path: /etc/fstab
+    line: '/dev/vdb /data auto defaults 0 0' 
+    create: yes
+
 - lineinfile:
     path: /etc/environment
     line: 'http_proxy="http://wwwproxy.unimelb.edu.au:8000"'
