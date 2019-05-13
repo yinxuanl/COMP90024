@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+
+{% block content %}
+<div class="container">
+    <div class="overlay"></div>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 col-md-10 mx-auto">
+          <div class="site-heading">
+            <h1>Sentiments Tendency from 2015</h1>
+              <span class="subheading">Sentiments have a Decreasing tendency in recent years among the tweets related to Marvel Movies</span>
+                <iframe name = "iFrame1" width=150% height=150% onload="this.height=iFrame1.document.body.scrollHeight" frameborder=0 src="marvelyear.html" >
+                </iframe>
+          </div>
+        </div>
+      </div>
+    </div>
+</div>
+{% endblock content %}
