@@ -13,7 +13,8 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
-
+from django.contrib.staticfiles.urls import staticfiles_urlpatterns
+from django.contrib import staticfiles
 from django.conf.urls import url
 from . import views
 
@@ -24,7 +25,22 @@ urlpatterns = [
 
     url(r'^contactinfo/$', views.TeamTemplateView.as_view(), name='contact_info'),
 
-    url(r'^marvel/$', views.MarvelTemplateView.as_view(), name='analysis_marvel'),
+    url(r'^marvel_topic1/$', views.MarvelTemplateView1.as_view(), name='analysis_marvel_user'),
 
-    url(r'^gameofthrones/$', views.GOTTemplateView.as_view(), name='analysis_gameOfThrones'),
+    url(r'^marvel_topic2/$', views.MarvelTemplateView2.as_view(), name='analysis_marvel_year'),
+
+    url(r'^marvel_topic1/marveluser.html$', views.MarvelPicture1.as_view(), name='analysis_marvel_user_picture'),
+
+    url(r'^marvel_topic2/marvelyear.html$', views.MarvelPicture2.as_view(), name='analysis_marvel_year_picture'),
+
+    url(r'^got_topic1/$', views.GotTemplateView1.as_view(), name='analysis_gameOfThrones_user'),
+
+    url(r'^got_topic2/$', views.GotTemplateView2.as_view(), name='analysis_gameOfThrones_month'),
+
+    url(r'^got_topic1/gotuser.html$', views.GotPicture1.as_view(), name='analysis_gameOfThrones_user_picture'),
+
+    url(r'^got_topic2/gotmonth.html$', views.GotPicture2.as_view(), name='analysis_gameOfThrones_month_picture'),
+
 ]
+
+urlpatterns += staticfiles_urlpatterns()
