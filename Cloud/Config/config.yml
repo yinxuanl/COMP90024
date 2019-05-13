@@ -1,4 +1,4 @@
-- hosts: harvester2, harvester1, dbServer
+- hosts: harvester2, harvester1, dbServer, webServer
   sudo: yes
   roles:
      - common
@@ -28,6 +28,11 @@
      - ./var/var.yml
   roles:
      - dbserver
+
+- hosts: webServer
+  sudo: yes
+  roles: 
+     - webserver
 
 
 
