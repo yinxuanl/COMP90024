@@ -1,0 +1,15 @@
+- name: Update pip
+  pip:
+    name: pip
+    extra_args: --upgrade
+    executable: pip3 
+
+- name: install packages for webserver
+  sudo: yes
+  pip:
+    name:
+      - Django
+      - couchdb
+      - pyecharts
+    executable: pip3
+    state: latest
