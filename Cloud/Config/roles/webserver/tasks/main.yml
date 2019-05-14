@@ -1,33 +1,36 @@
 - name: Get python3.6 package
-  command: sudo add-apt-repository ppa:jonathonf/python-3.6
-
-- name: Update apt-get
-  command: sudo apt-get update
-
-- name: Install python3.6
-  command: sudo apt-get install python3.6
-
-- name: Set defualt python3 as python3.6
-  command: update-alternatives --install /usr/bin/python3 python3 /usr/bin/python3.6 2
-
-- name: Update python3 config
-  command: update-alternatives --config python3
-
-- name: Update pip3
-  command: sudo apt-get install python3-pip　
-
-- name: Upgrade pip3
-  pip:
-    name: pip
-    extra_args: --upgrade
-    executable: pip3 
-
-- name: install packages for webserver
   sudo: yes
-  pip:
-    name:
-      - Django
-      - couchdb
-      - pyecharts
-    executable: pip3
-    state: latest
+  apt_repository:
+    repo: "ppa:jonathonf/python-3.6"
+
+
+# - name: Update apt-get
+#   command: sudo apt-get update
+
+# - name: Install python3.6
+#   command: sudo apt-get install python3.6
+
+# - name: Set defualt python3 as python3.6
+#   command: update-alternatives --install /usr/bin/python3 python3 /usr/bin/python3.6 2
+
+# - name: Update python3 config
+#   command: update-alternatives --config python3
+
+# - name: Update pip3
+#   command: sudo apt-get install python3-pip　
+
+# - name: Upgrade pip3
+#   pip:
+#     name: pip
+#     extra_args: --upgrade
+#     executable: pip3 
+
+# - name: install packages for webserver
+#   sudo: yes
+#   pip:
+#     name:
+#       - Django
+#       - couchdb
+#       - pyecharts
+#     executable: pip3
+#     state: latest
