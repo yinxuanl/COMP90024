@@ -27,8 +27,8 @@ CITY = '-23.322, 132.892'
 RANGE = '2000mi'
 
 # time range information
-FROM_DATE = '2019-05-01'
-TO_DATE = '2019-05-10'
+FROM_DATE = '2019-05-08'
+TO_DATE = '2019-05-15'
 
 
 def search(query):
