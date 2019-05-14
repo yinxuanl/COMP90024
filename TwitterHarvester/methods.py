@@ -51,11 +51,23 @@ def process_tweet(tweet_object):
         'hashtags': return_hashtags(tweet_object['entities']['hashtags']),
         'symbols': tweet_object['entities']['symbols'],
         'user_screen_name': tweet_object['user']['screen_name'],
-        'coordinates': tweet_object['coordinates']['coordinates'],
-        'place': tweet_object['place']['full_name'],
         'is_retweet': is_retweeted
 
     }
+
+    try:
+        coordinates = tweet_object['coordinates']['coordinates']
+    except TypeError:
+        coordinates = ''
+
+    item['coordinates'] = coordinates
+
+    try:
+        place = tweet_object['place']['full_name']
+    except TypeError:
+        place = ''
+
+    item['place'] = place
 
     if item['is_retweet']:
         retweet_from = tweet_object['retweeted_status']['user']['screen_name']
