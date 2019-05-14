@@ -20,7 +20,10 @@
   command: update-alternatives --config python3
 
 - name: Update pip3
-  command: sudo apt-get install python3-pip　
+  sudo: yes
+  apt: 
+    name: 
+      - python3-pip
 
 - name: Upgrade pip3
   pip:
