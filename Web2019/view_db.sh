@@ -1,2 +1,6 @@
 #!/usr/bin/env bash
-python3 view_db.py
+while true
+do
+  python3 view_db.py
+  sleep 86400
+done
