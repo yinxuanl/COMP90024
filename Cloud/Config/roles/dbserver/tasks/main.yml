@@ -37,6 +37,8 @@
     path: /etc/cluster.sh
     line: 'curl -X POST -H "Content-Type: application/json" http://admin:admin@127.0.0.1:5984/_cluster_setup -d ''{"action": "finish_cluster"}'''
 
+- shell: sudo sleep 60
+
 - name: Run the script
   shell: /etc/cluster.sh 
 

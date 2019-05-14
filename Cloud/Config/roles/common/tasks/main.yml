@@ -1,6 +1,4 @@
 ---
-# - name: update packages
-  #  apt: update_cache=yes
 
 - name: Format the volume
   shell: sudo mkfs.ext4 /dev/vdb
