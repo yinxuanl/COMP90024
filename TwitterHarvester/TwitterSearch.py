@@ -21,10 +21,10 @@ SERVER = 'http://admin:admin@localhost:5984'
 server = couchdb.Server(SERVER)
 
 # geo information
-# CITY = '-33.865143,151.209900'  # sydney
-# RANGE = '30mi'
-CITY = '-23.322, 132.892'
-RANGE = '2000mi'
+CITY = '-33.865143,151.209900'  # sydney
+RANGE = '30mi'
+# CITY = '-23.322, 132.892'
+# RANGE = '2000mi'
 
 # time range information
 FROM_DATE = '2019-05-08'
