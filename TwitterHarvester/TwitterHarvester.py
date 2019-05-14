@@ -18,7 +18,6 @@ api = tweepy.API(auth)
 
 # settings for CouchDB
 SERVER = 'http://admin:admin@localhost:5984'
-# SERVER = 'http://127.0.0.1:5984/'
 
 # connecting CouchDB server
 server = couchdb.Server(SERVER)
