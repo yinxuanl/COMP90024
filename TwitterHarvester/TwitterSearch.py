@@ -17,8 +17,7 @@ auth.set_access_token(ACCESS_TOKEN, ACCESS_TOKEN_SECRET)
 api = tweepy.API(auth)
 
 # settings for CouchDB
-# SERVER = 'http://admin:admin@localhost:5984'
-SERVER = 'http://127.0.0.1:5984/'
+SERVER = 'http://admin:admin@localhost:5984'
 server = couchdb.Server(SERVER)
 
 # geo information
